@@ -30,6 +30,6 @@ ok t ['null', 'null'], [undef];
 
 eval { sub foo :ARGS {} }; ok !$@;
 eval { foo() }; ok !$@;
-eval 'sub bar :ARGS { Attribute::Args::check([], \@_) }'; ok $@;
+eval 'my $baz = sub :ARGS {}; &$baz();'; ok $@, $@;
 eval { Attribute::Args::ARGS(__PACKAGE__, \*foo, \&foo, undef, 'null') }; ok !$@;
 eval { Attribute::Args::ARGS(__PACKAGE__, \*foo, \&foo, undef, ['null']) }; ok !$@;
